@@ -241,9 +241,60 @@ const exibirPerfil = (user) =>{
     voltarAoMenu();
 };
 
-const exibirCatalogo = (catalogo) =>{
+const exibirCatalogo = (catalogo) => {
+//P.S.: Dei uma pesquisada porque queria exibir algo organizado no console pra além de uma lista gigante, 
+//mas a lógica é o uso do forEach e um console.log dentro com as propriedades do filme/série que quero exibir
 
-}
+    // Função auxiliar para preencher espaços e manter o alinhamento das colunas
+    const padEnd = (str, length) => str.padEnd(length, ' ');
+
+    const larguraCard = 42;
+    const espacoColunas = "   ";
+
+    // Percorre o catálogo em blocos de 3 para formar as colunas
+    for (let i = 0; i < catalogo.length; i += 3) {
+        const linhaItens = catalogo.slice(i, i + 3);
+        
+        let cabecalhos = [];
+        let linhasGeneros = [];
+        let linhasDuracao = [];
+        let linhasTemporadas = [];
+        let linhasEpisodios = [];
+        let rodapes = [];
+
+        //Percorre 3 itens do catálogo (que serão impressos na mesma linha)
+        linhaItens.forEach(item => {
+            const tituloTipo = `---------- ${item.titulo} (${item.tipo}) ----------`;
+            cabecalhos.push(padEnd(tituloTipo, larguraCard));
+
+            const generosStr = `|  Gêneros: [${item.generos.join(", ")}]`;
+            linhasGeneros.push(padEnd(generosStr, larguraCard));
+
+            const duracaoStr = `|  Duração: ${item.duracaoMin} min`;
+            linhasDuracao.push(padEnd(duracaoStr, larguraCard));
+
+            if (item instanceof Serie) {
+                linhasTemporadas.push(padEnd(`|  Temporadas: ${item.temporadas}`, larguraCard));
+                linhasEpisodios.push(padEnd(`|  Episódios: ${item.episodios}`, larguraCard));
+            } else {
+                linhasTemporadas.push(padEnd(`|  Temporadas: -`, larguraCard));
+                linhasEpisodios.push(padEnd(`|  Episódios: -`, larguraCard));
+            }
+
+            rodapes.push(padEnd("-".repeat(38), larguraCard));
+        });
+
+        // Imprime a fileira com os 3 cards lado a lado
+        console.log(cabecalhos.join(espacoColunas));
+        console.log(linhasGeneros.join(espacoColunas));
+        console.log(linhasDuracao.join(espacoColunas));
+        console.log(linhasTemporadas.join(espacoColunas));
+        console.log(linhasEpisodios.join(espacoColunas));
+        console.log(rodapes.join(espacoColunas));
+        console.log(""); // Linha em branco separando as fileiras
+    }
+};
+
 
 const calcularCompatibilidades = (user, catalogo) => {
     catalogo.forEach((content) => {
@@ -251,7 +302,11 @@ const calcularCompatibilidades = (user, catalogo) => {
         console.log(`${content.titulo} (${content.tipo}) \n ${afinidade}`);
     })
     voltarAoMenu();
-}
+};
+
+const exibirRecomendacaoPrincipal = (user, catalogo) => {
+
+};
 
 // ----------- Menu --------------
 
