@@ -75,7 +75,7 @@ const generosTransform = (g) =>{
 const nome = prompt('Qual é o seu nome? ');
 
 const idade = Number(prompt('Qual é a sua idade? '));
-generos.forEach((item) =>{console.log( item + '\n')})
+generosList.forEach((item) =>{console.log( item + '\n')})
 
 let generosFav = ["","",""]
 
@@ -238,7 +238,7 @@ const exibirPerfil = (user) =>{
     console.log(`Nome: ${user.nome}\n`);
     console.log(`Idade: ${user.idade}\n`);
     console.log(`Gêneros Favoritos: ${user.generosFavoritos}\n`);
-    voltarAoMenu();
+    menuPrincipal();
 };
 
 const exibirCatalogo = (catalogo) => {
@@ -293,6 +293,7 @@ const exibirCatalogo = (catalogo) => {
         console.log(rodapes.join(espacoColunas));
         console.log(""); // Linha em branco separando as fileiras
     }
+    menuPrincipal()
 };
 
 
@@ -301,7 +302,7 @@ const calcularCompatibilidades = (user, catalogo) => {
         const afinidade =  content.calcularAfinidade(user.generosFavoritos);
         console.log(`${content.titulo} (${content.tipo}) \n ${afinidade}`);
     })
-    voltarAoMenu();
+    menuPrincipal()
 };
 
 const exibirRecomendacaoPrincipal = (user, catalogo) => {
@@ -309,13 +310,6 @@ const exibirRecomendacaoPrincipal = (user, catalogo) => {
 };
 
 // ----------- Menu --------------
-
-const voltarAoMenu = () =>{
-    let voltar = PromptSync("Voltar ao Menu? (s/n)")
-    if (voltar === s) {
-        menuPrincipal();
-    };
-}
 
 const menuPrincipal = () =>{
     let opcao;
@@ -351,3 +345,5 @@ const menuPrincipal = () =>{
     }
     } while (opcao !== "5");
 }
+
+menuPrincipal();
