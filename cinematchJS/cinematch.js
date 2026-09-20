@@ -306,7 +306,19 @@ const calcularCompatibilidades = (user, catalogo) => {
 };
 
 const exibirRecomendacaoPrincipal = (user, catalogo) => {
+    
+    const maisRecomendado = catalogo.reduce((anterior, atual) => {
+        const afinidadeAnterior = anterior.generos.filter(g => user.generosFavoritos.includes(g)).length;
+        const afinidadeAtual = atual.generos.filter(g => user.generosFavoritos.includes(g)).length;
+        return afinidadeAtual > afinidadeAnterior ? atual : anterior;
+    });
 
+    const generosFaltantes = generosList.find(g => !user.generosFavoritos.includes(g));
+
+    console.log(`\nRecomendação principal: ${maisRecomendado.titulo} (${maisRecomendado.tipo})`);
+    if(generosFaltantes) {
+        console.log(`Você já curte ${user.generosFavoritos[0]}, que tal arriscar um pouco de ${generosFaltantes}?`);
+    }
 };
 
 // ----------- Menu --------------
