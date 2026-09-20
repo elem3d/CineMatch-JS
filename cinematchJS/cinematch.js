@@ -233,7 +233,6 @@ const catalogo = [
 
 // ---------- Funções ------------
 
-
 const exibirPerfil = (user) =>{
     console.log(`\n==== Perfil ====\n`);
     console.log(`Nome: ${user.nome}\n`);
@@ -306,7 +305,6 @@ const calcularCompatibilidades = (user, catalogo) => {
         const afinidade =  content.calcularAfinidade(user.generosFavoritos);
         console.log(`${content.titulo} (${content.tipo}) \n ${afinidade}`);
     })
-    menuPrincipal()
 };
 
 const exibirRecomendacaoPrincipal = (user, catalogo) => {
