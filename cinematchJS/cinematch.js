@@ -233,12 +233,18 @@ const catalogo = [
 
 // ---------- Funções ------------
 
+
 const exibirPerfil = (user) =>{
     console.log(`\n==== Perfil ====\n`);
     console.log(`Nome: ${user.nome}\n`);
     console.log(`Idade: ${user.idade}\n`);
     console.log(`Gêneros Favoritos: ${user.generosFavoritos}\n`);
-    menuPrincipal();
+};
+
+carregarCatalogo = async (callback) => {
+    console.log("\nCarregando catálogo... Aguarde.\n");
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    callback(catalogo)
 };
 
 const exibirCatalogo = (catalogo) => {
@@ -293,9 +299,7 @@ const exibirCatalogo = (catalogo) => {
         console.log(rodapes.join(espacoColunas));
         console.log(""); // Linha em branco separando as fileiras
     }
-    menuPrincipal()
 };
-
 
 const calcularCompatibilidades = (user, catalogo) => {
     catalogo.forEach((content) => {
@@ -323,7 +327,7 @@ const exibirRecomendacaoPrincipal = (user, catalogo) => {
 
 // ----------- Menu --------------
 
-const menuPrincipal = () =>{
+const menuPrincipal = async () =>{
     let opcao;
 
     do {
@@ -341,7 +345,7 @@ const menuPrincipal = () =>{
         exibirPerfil(usuario);
         break;
         case "2":
-        exibirCatalogo(catalogo);
+        await carregarCatalogo(exibirCatalogo);
         break;
         case "3":
         calcularCompatibilidades(usuario, catalogo);
